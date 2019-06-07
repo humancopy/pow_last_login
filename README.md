@@ -1,8 +1,8 @@
-# PowLasLogin
+# PowLastLogin
 
 [![Build Status](https://travis-ci.org/humancopy/pow_last_login.svg?branch=master)](https://travis-ci.org/humancopy/pow_last_login) [![hex.pm](http://img.shields.io/hexpm/v/pow_last_login.svg?style=flat)](https://hex.pm/packages/pow_last_login)
 
-This [Pow](https://github.com/danschultzer/pow) extension adds the ability to track when and from which IP address a user logged in.
+A [Pow](https://github.com/danschultzer/pow) extension that adds the ability to track when and from which IP address a user logged in.
 
 You can then add to your templates a message such as:
 
@@ -13,6 +13,8 @@ You last logged in <%= Timex.format!(@conn.assigns.current_user.last_login_at, "
 Time formatting courtesy of [timex](https://github.com/bitwalker/timex), thanks ;)
 
 ## Installation
+
+Installing PowLastLogin is super simple.
 
 Add PowLastLogin to the list of dependencies in `mix.exs`:
 
@@ -26,19 +28,25 @@ def deps do
 end
 ```
 
-Run: `mix pow.extension.ecto.gen.migrations --extension PowLastLogin`
+Run `mix pow.extension.ecto.gen.migrations --extension PowLastLogin` followed by `mix ecto.migrate` to get the columns added to the users table.
 
-And then: `mix ecto.migrate`
-
-Don't forget to add it to the list of extensions, and if you didn't already, also the `controller_callbacks` option:
+Add it to the list of Pow extensions, and if you didn't already, also the `controller_callbacks` option:
 
 ```elixir
 config :my_app, :pow,
   user: MyApp.Users.User,
   repo: MyApp.Repo,
-  extensions: [PowLastLogin],
+  extensions: [...PowLastLogin],
   controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks
 ```
+
+And in the `user` schema file:
+
+```elixir
+use Pow.Extension.Ecto.Schema,
+    extensions: [...PowPersistentSession]
+```
+
 
 That's it :)
 
