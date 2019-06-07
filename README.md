@@ -22,7 +22,7 @@ Add PowLastLogin to the list of dependencies in `mix.exs`:
 def deps do
   [
     # ...
-    {:pow_last_login, "~> 0.1.0"}
+    {:pow_last_login, "~> 0.1.1"}
     # ...
   ]
 end

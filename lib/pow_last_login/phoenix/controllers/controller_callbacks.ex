@@ -15,7 +15,7 @@ defmodule PowLastLogin.Phoenix.ControllerCallbacks do
   defp update_last_login(user, conn, config) do
     remote_ip =
       conn.remote_ip
-      |> :inet_parse.ntoa
+      |> :inet_parse.ntoa()
       |> to_string()
 
     user
