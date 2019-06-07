@@ -50,6 +50,10 @@ use Pow.Extension.Ecto.Schema,
 
 That's it :)
 
+## Real IP
+
+If you're behind a proxy (e.g. CloudFlare) you should use a plug (such as [RemoteIp](https://github.com/ajvondrak/remote_ip)) to get the real IP of the client.
+
 ## LICENSE
 
 (The MIT License)
