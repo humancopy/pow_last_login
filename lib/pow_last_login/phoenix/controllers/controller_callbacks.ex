@@ -18,9 +18,6 @@ defmodule PowLastLogin.Phoenix.ControllerCallbacks do
       |> :inet_parse.ntoa
       |> to_string()
 
-      user
-      |> Context.update_last_login(remote_ip, config)
-
     user
     |> Context.update_last_login(remote_ip, config)
     |> case do
