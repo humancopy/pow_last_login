@@ -42,7 +42,7 @@ And in the `user` schema file:
 
 ```elixir
 use Pow.Extension.Ecto.Schema,
-    extensions: [...PowPersistentSession]
+    extensions: [...PowLastLogin]
 ```
 
 Generate the migrations, then migrate your database. This adds the login columns added to your users table.
