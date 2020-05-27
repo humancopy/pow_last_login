@@ -9,6 +9,8 @@ config :pow_last_login, :pow,
 
 config :pow_last_login, PowLastLogin.Test.Ecto.Repo,
   database: "pow_last_login_test",
+  username: "postgres",
+  password: "postgres",
   pool: Ecto.Adapters.SQL.Sandbox,
   priv: "test/support/ecto/priv"
 
