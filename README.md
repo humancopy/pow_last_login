@@ -28,8 +28,6 @@ def deps do
 end
 ```
 
-Run `mix pow.extension.ecto.gen.migrations --extension PowLastLogin` followed by `mix ecto.migrate` to get the columns added to the users table.
-
 Add it to the list of Pow extensions, and if you didn't already, also the `controller_callbacks` option:
 
 ```elixir
@@ -44,9 +42,15 @@ And in the `user` schema file:
 
 ```elixir
 use Pow.Extension.Ecto.Schema,
-    extensions: [...PowPersistentSession]
+    extensions: [...PowLastLogin]
 ```
 
+Generate the migrations, then migrate your database. This adds the login columns added to your users table.
+
+```
+mix pow.extension.ecto.gen.migrations --extension PowLastLogin
+mix ecto.migrate
+```
 
 That's it :)
 
