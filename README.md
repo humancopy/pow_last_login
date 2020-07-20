@@ -44,7 +44,7 @@ And in the `user` schema file:
 
 ```elixir
 use Pow.Extension.Ecto.Schema,
-    extensions: [...PowPersistentSession]
+    extensions: [...PowLastLogin]
 ```
 
 
