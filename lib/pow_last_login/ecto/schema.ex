@@ -13,19 +13,27 @@ defmodule PowLastLogin.Ecto.Schema do
     ]
   end
 
-  @spec last_login_changeset(Ecto.Schema.t(), String.t()) :: Changeset.t()
-  def last_login_changeset(%Changeset{data: %user_mod{} = user} = changeset, login_from) do
-    login_at = Pow.Ecto.Schema.__timestamp_for__(user_mod, :last_login_at)
 
-    changeset
-    |> Changeset.put_change(:last_login_at, user.current_login_at)
-    |> Changeset.put_change(:last_login_from, user.current_login_from)
-    |> Changeset.put_change(:current_login_at, login_at)
-    |> Changeset.put_change(:current_login_from, login_from)
-  end
-  def last_login_changeset(user, login_from) do
-    user
-    |> Changeset.change()
-    |> last_login_changeset(login_from)
+  @doc false
+  @impl true
+  defmacro __using__(_config) do
+    quote do
+      @spec last_login_changeset(Ecto.Schema.t(), String.t()) :: Changeset.t()
+      def last_login_changeset(%Changeset{data: %user_mod{} = user} = changeset, login_from) do
+        login_at = Pow.Ecto.Schema.__timestamp_for__(user_mod, :last_login_at)
+
+        changeset
+        |> Changeset.put_change(:last_login_at, user.current_login_at)
+        |> Changeset.put_change(:last_login_from, user.current_login_from)
+        |> Changeset.put_change(:current_login_at, login_at)
+        |> Changeset.put_change(:current_login_from, login_from)
+      end
+
+      def last_login_changeset(user, login_from) do
+        user
+        |> Changeset.change()
+        |> last_login_changeset(login_from)
+      end
+    end
   end
 end
