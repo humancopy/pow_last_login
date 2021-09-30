@@ -33,7 +33,7 @@ defmodule PowLastLogin.MixProject do
     [
       {:pow, "~> 1.0.15"},
       {:ecto, "~> 2.2 or ~> 3.0"},
-      {:phoenix, "~> 1.3.0 or ~> 1.4.0 or ~> 1.5.0"},
+      {:phoenix, "~> 1.3.0 or ~> 1.4.0 or ~> 1.5.0 or ~> 1.6.0"},
       {:phoenix_html, ">= 2.0.0 and <= 3.0.0"},
       {:phoenix_ecto, "~> 4.0.0", only: [:dev, :test]},
       {:credo, "~> 0.9.3", only: [:dev, :test]},
