@@ -3,14 +3,14 @@ defmodule PowLastLogin.Ecto.SchemaTest do
   use PowLastLogin.Test.Ecto.TestCase
   doctest PowLastLogin.Ecto.Schema
 
-  alias PowLastLogin.Ecto.Schema
   alias PowLastLogin.Test.{Users.User}
 
-  @password      "secret1234"
-  @user          Ecto.put_meta(%User{email: "test@example.com", password: @password, confirm_password: @password}, state: :loaded)
+  @password "secret1234"
+  # @user          Ecto.put_meta(%User{email: "test@example.com", password: @password, confirm_password: @password}, state: :loaded)
+  @user Ecto.put_meta(%User{email: "test@example.com", password: @password}, state: :loaded)
 
-  @first_login_at    DateTime.utc_now()
-  @first_login_from  "127.0.0.1"
+  @first_login_at DateTime.utc_now()
+  @first_login_from "127.0.0.1"
   @second_login_from "127.0.0.2"
 
   test "user_schema/1" do
@@ -23,7 +23,7 @@ defmodule PowLastLogin.Ecto.SchemaTest do
   end
 
   test "last_login_changeset/2 sets :current_login_from and :current_login_at" do
-    changeset = Schema.last_login_changeset(@user, @first_login_from)
+    changeset = User.last_login_changeset(@user, @first_login_from)
     assert changeset.valid?
 
     assert changeset.changes.current_login_from == @first_login_from
@@ -39,7 +39,7 @@ defmodule PowLastLogin.Ecto.SchemaTest do
   test "last_login_changeset/2 puts :current_login_at as :last_login_at and :current_login_from as :last_login_from" do
     user = %{@user | current_login_at: @first_login_at, current_login_from: @first_login_from}
 
-    changeset = Schema.last_login_changeset(user, @second_login_from)
+    changeset = User.last_login_changeset(user, @second_login_from)
     assert changeset.valid?
 
     refute changeset.changes.current_login_at == user.current_login_at

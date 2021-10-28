@@ -1,18 +1,13 @@
 defmodule PowLastLogin do
-  @moduledoc """
-  Documentation for PowLastLogin.
-  """
+  @moduledoc false
+  use Pow.Extension.Base
 
-  @doc """
-  Hello world.
+  @impl true
+  def ecto_schema?(), do: true
 
-  ## Examples
+  @impl true
+  def use_ecto_schema?(), do: true
 
-      iex> PowLastLogin.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
+  @impl true
+  def phoenix_controller_callbacks?(), do: true
 end
